@@ -19,7 +19,21 @@ app.use(express.static('public'));
 const PORT = process.env.PORT || 3000;
 
 
+// GET Route for homepage (index.html)
+app.get('/', (req, res) =>
+  res.sendFile(path.join(__dirname, './public/index.html'))
+);
 
+
+// GET route for notes page (notes.html)
+app.get('/notes', (req, res) => {
+  res.sendFile(path.join(__dirname,'./public/notes.html'));
+}); 
+
+// GET route for wild character (notes.html)
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, "./public/index.html"));
+});
 
 
 
