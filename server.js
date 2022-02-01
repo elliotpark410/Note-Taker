@@ -3,6 +3,8 @@ const express = require("express");
 const path = require("path");
 const fs = require("fs");
 
+
+
 // Sets up the Express App
 const app = express();
 
@@ -12,6 +14,9 @@ app.use(express.json());
 
 // Setting up express to serve static files (index.html, notes.html, style.css, and index.js) in "public" directory
 app.use(express.static('public'));
+
+
+
 
 // process.env.PORT will allow any PORT that a user enters or 3000
 // e.g. if you run node index.js ,Node will use 3000
@@ -30,20 +35,31 @@ app.get('/notes', (req, res) => {
   res.sendFile(path.join(__dirname,'./public/notes.html'));
 }); 
 
-// GET route for wild character (notes.html)
+
+
+// GET route for notes data stored as stringified array in db.json 
+app.get('/api/notes', (req, res) => {
+  console.log('notes route successful');
+  fs.readFile('./db/db.json', 'utf8', (err, data) => {
+    err ? console.error(err) : console.log(data)
+    if (err) throw err;
+    // (data) is content stored in db.json
+    // Need to JSON.parse(data) because it was stored as a stringified array
+    let savedNotes = JSON.parse(data);
+    console.log(savedNotes);
+    res.json(savedNotes);
+  });
+}); 
+
+
+
+// The path string allows using regular expressions i.e. "*"
+// Whenever user enters (http://localhost:3000/anyCharacters), then it will do a GET route for homepage (index.html)
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, "./public/index.html"));
+  res.sendFile(path.join(__dirname, './public/index.html'));
 });
-
-
-
-
-
-
-
-
 
 // Starts the server to begin listening
 app.listen(PORT, function() {
-  console.log("App listening on PORT: " + PORT);
+  console.log(`App listening at http://localhost:${PORT} 🚀`)
 });
