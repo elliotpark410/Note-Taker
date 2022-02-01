@@ -8,6 +8,10 @@ const fs = require("fs");
 // Sets up the Express App
 const app = express();
 
+
+// import notes data from db.json for req.body.id
+const { notes } = require('./db/db.json');
+
 // Sets up the Express app to handle data parsing for PUTS and POSTS
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -50,6 +54,22 @@ app.get('/api/notes', (req, res) => {
     res.json(savedNotes);
   });
 }); 
+
+
+// POST route to store notes data as stringified array in db.json
+app.post('/api/notes', (req, res) => {
+
+  // req.body object allows you to access data in a string or JSON object that user entered 
+  // e.g. a user does a POST to http://localhost:3000/api/notes in Insomnia or browser and enters data in object format, I will be able to access that data
+  let newNote = req.body;
+
+
+  // CONTINUE HERE!!!!!!!!!!!!!!!!!!!
+
+});
+
+
+
 
 
 
