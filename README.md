@@ -1,28 +1,24 @@
 # Note-Taker
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-The Note Taker application can be used to write and save notes. It will use an Express.js back end and will save and retrieve note data from a JSON file
-
-OLD README.MD MUST UPDATE!!
-
-The Team Profile Generator is a command-line application that takes in information about employees on a software engineering team, then generates an index.html webpage that displays summaries for each person. The index.html is dynamically generated with user input using the [Inquirer package](https://www.npmjs.com/package/inquirer). Test-driven development is done with [Jest package](https://www.npmjs.com/package/jest). The purpose of this application is so that developers can quickly create an engineering team summary for new projects. 
+The Note Taker application can be used to write, save, and retrieve notes. The application uses the [Express package](https://www.npmjs.com/package/express) for the back end framework. It will save and retrieve note data from a JSON file. 
 
 <br>
 
 
 ## Links
 
-Deployed Sample HTML
-> [https://elliotpark410.github.io/Team-Profile-Generator/](https://elliotpark410.github.io/Team-Profile-Generator/)
+Deployed App on Heroku
+> [https://note-taker-elliotpark.herokuapp.com/](https://note-taker-elliotpark.herokuapp.com/)
 <br>
 
 Link to GIF of Application
-> [https://drive.google.com/file/d/1kdESWAR1hzb1fa7N0LL4Lrgjwg3YPNjN/view](https://drive.google.com/file/d/1kdESWAR1hzb1fa7N0LL4Lrgjwg3YPNjN/view)
+> [https://drive.google.com/file/d/1-fN70Da55qfgyvn8uq_jFv9tV8EVjPYc/view](https://drive.google.com/file/d/1-fN70Da55qfgyvn8uq_jFv9tV8EVjPYc/view)
 <br>
 
 
 Github Repository
-> [https://github.com/elliotpark410/Team-Profile-Generator](https://github.com/elliotpark410/Team-Profile-Generator)
+> [https://github.com/elliotpark410/Note-Taker](https://github.com/elliotpark410/Note-Taker)
 
 <br>
 
@@ -50,7 +46,7 @@ Github Repository
 To begin the application, use the following in command line:
 
 ```bash
-node index.js
+node server.js
 ```
 <br>
 
@@ -75,15 +71,9 @@ node index.js
 
 <br>
 
-4. Now you have to install Inquirer.js which is one of the many node packages. In command line, you can enter:
+4. Now you have to install Express.js which is one of the many node packages. In command line, you can enter:
 
->npm install inquirer
-
-<br>
-
-5. Additionally, if you would like to run tests, you have to install Jest.js which is one of the many node packages. In command line, you can enter:
-
->npm install jest
+>npm install express
 
 <br>
 
@@ -96,10 +86,32 @@ Requires node.js, npm inquirer, and npm jest (optional)
 
 ## Test-Instructions
 
-To test with jest (optional), use the following in command line:
+To test the API, I recommend downloading [Insomnia's API Platform](https://insomnia.rest/) and enter the following in Insomnia's URL:
+
+>GET http://localhost:3000/api/notes
+
+<br>
+
+>POST http://localhost:3000/api/notes
+
+Example POST body: 
 ```bash
-npm run test 
+{
+  "title":"Notes Title",
+  "text":"notes text content"
+}
 ```
+*id is automatically generated so you do not need to enter id
+
+<br>
+<br>
+
+>DELETE http://localhost:3000/api/notes/:id
+
+<br>
+
+Example DELETE: The API request below will delete note with id = "1"
+>DELETE http://localhost:3000/api/notes/1
 
 <br>
 
@@ -110,8 +122,8 @@ npm run test
 * [Bootstrap CSS](https://getbootstrap.com/)
 * [Javascript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 * [Node.js](https://nodejs.org/en/)
-* [npm Inquirer](https://www.npmjs.com/package/inquirer)
-* [npm Inquirer](https://www.npmjs.com/package/jest)
+* [npm Express](https://www.npmjs.com/package/express)
+
 
 <br>
 
@@ -137,7 +149,7 @@ To install this code, please use [Github's guidlines to clone the repository](ht
 <br>
 
 Github repository:
->https://github.com/elliotpark410/Team-Profile-Generator
+>https://github.com/elliotpark410/Note-Taker
 
 <br>
 
@@ -145,18 +157,13 @@ Github repository:
 ## Screenshots 
 
 <br>
-Screenshot of jest in command line after running "npm run test" for test-driven development
-<img src="Images\Jest TDD Success screenshot.png" title="Jest Test-Driven Development Success screenshot" width = 700px>
+Screenshot of Homepage
+<img src="Images\Homepage screenshot.png" title="Note Taker Homepage screenshot" width = 700px>
 
 <br>
 <br>
-Screenshot of inquirer in command line after running "node index.js" to begin application
-<img src="Images\Inquirer Command Line Prompt screenshot.png" title="Inquirer Command Line Prompt screenshot" width = 700px>
-
-<br>
-<br>
-Screenshot of dynamically generated index.html
-<img src="Images\Generated HTML Team Page screenshot.png" title="Dynamically Generated HTML Team Page screenshot" width = 700px>
+Screenshot of Notes page
+<img src="Images\Notes Page screenshot.png" title="Note Taker Notes Page screenshot" width = 700px>
 
 <br>
 <br>
@@ -164,12 +171,12 @@ Screenshot of dynamically generated index.html
 
 ## GIF-of-Application
 
-<img src="Images\Team Profile Generator.gif" title="README generator" width = 500px>
+<img src="Images\Note Taker .gif" title="Note Taker" width = 680px>
 
 <br>
 
 Link to GIF of Application
-> [https://drive.google.com/file/d/1kdESWAR1hzb1fa7N0LL4Lrgjwg3YPNjN/view](https://drive.google.com/file/d/1kdESWAR1hzb1fa7N0LL4Lrgjwg3YPNjN/view)
+> [https://drive.google.com/file/d/1-fN70Da55qfgyvn8uq_jFv9tV8EVjPYc/view](https://drive.google.com/file/d/1-fN70Da55qfgyvn8uq_jFv9tV8EVjPYc/view)
 <br>
 
 <br>

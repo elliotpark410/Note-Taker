@@ -15,7 +15,7 @@ app.use(express.static("public"));
 
 // process.env.PORT will allow any PORT that a user enters or 3000
 // e.g. if you run node index.js ,Node will use 3000
-// If you run PORT=4444 node index.js, Node will use process.env.PORT which equals to 4444 
+// If you run PORT=4444 node index.js, Node will use process.env.PORT which equals to 4444
 const PORT = process.env.PORT || 3000;
 
 
@@ -24,12 +24,10 @@ app.get("/", (req, res) =>
   res.sendFile(path.join(__dirname, "./public/index.html"))
 );
 
-
 // GET route for notes page (notes.html)
 app.get("/notes", (req, res) => {
   res.sendFile(path.join(__dirname, "./public/notes.html"));
 });
-
 
 // GET route for notes data stored as stringified array in db.json
 app.get("/api/notes", (req, res) => {
@@ -39,7 +37,7 @@ app.get("/api/notes", (req, res) => {
   fs.readFile("./db/db.json", "utf8", (err, data) => {
     err ? console.error(err) : console.log(data);
     if (err) throw err;
-    
+
     // (data) is content stored in db.json
     // Need to JSON.parse(data) because it was stored as a stringified array
     let savedNotes = JSON.parse(data);
@@ -49,7 +47,6 @@ app.get("/api/notes", (req, res) => {
     res.json(savedNotes);
   });
 });
-
 
 // POST route to store notes data as stringified array in db.json
 app.post("/api/notes", (req, res) => {
@@ -95,7 +92,6 @@ app.post("/api/notes", (req, res) => {
     res.json(savedNotes);
   });
 });
-
 
 // DELETE route to delete note depending on id parameter
 // e.g. if user enters "http://localhost:3000/api/notes/4", then it will delete the note with id: 4
@@ -146,7 +142,6 @@ app.delete("/api/notes/:id", function (req, res) {
     res.json(savedNotes);
   });
 });
-
 
 // The path string allows using regular expressions i.e. "*"
 // Whenever user enters (http://localhost:3000/anyCharacters), then it will do a GET route for homepage (index.html)
