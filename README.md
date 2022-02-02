@@ -183,30 +183,53 @@ Link to GIF of Application
 
 ## Code-Snippets
 
-This code snippet shows how you can create dynamically generated HTML file using node.js
+This code snippet shows how you can create a delete route to delete an object with JavaScript, Node.js, and npm Express
 
-* function writeToFile(employeeData) utilizes a node module called "fs", i.e. file system, which allows us to access physical file systems. "fs.writeFile()" method is used to asynchonously write specified data to a file
+* "app.delete("/api/notes/:id", function (req, res)" will create a DELETE route to delete a note depending on id parameter. For example, if user enters "http://localhost:3000/api/notes/4", then it will delete the note with id: 4
 
-* function writeToFile(employeeData) creates a file "./dist/index.html" and writes data "employeeData which is dynamically generated HTML using generateHTML.js and teamArray"
+* "fs.readFile("db/db.json", "utf8", (err, data)" is used to read existing array data in db.json
 
-* If there is an error during the file writing process, then it will console the error. If there is no error, then it will console "Your team profile has been created"
+* "let savedNotes = JSON.parse(data);" is used because the data in db.json was stored as stringified array so we need to do a JSON.parse
+
+* "let noteId = req.params.id;" takes the id parameter entered by user which will later be used to recreate the notes object minus the note with the id parameter entered. For example, if user enters "http://localhost:3000/api/notes/2", then it will recreate the savedNotes array minus the object that has id: 2
+
+* savedNotes uses the .filter() method which creates a new array filled with elements that pass the test of notDeletedNotes.id is not equal to noteId
+
+*  The for of statement loops through the values of an iterable object so it will loop through all of the notDeletedNotes in savedNotes array
 
 ```
+app.delete("/api/notes/:id", function (req, res) {
+  console.log("notes delete route successful");
 
-function generateCard(teamArray) {
-  writeToFile(generateHTML(teamArray));
-}
+  fs.readFile("db/db.json", "utf8", (err, data) => {
+    err ? console.error(err) : console.log(data);
+    if (err) throw err;
 
-function writeToFile(employeeData) {
-  fs.writeFile("./dist/index.html", employeeData, (err) => {
-    if (err) {
-      console.log(err);
-      return;
-    } else {
-      console.log("Your team profile has been created");
+    let savedNotes = JSON.parse(data);
+    let noteId = req.params.id;
+    savedNotes = savedNotes.filter((notDeletedNote) => {
+      return notDeletedNote.id != noteId;
+    });
+
+    let newNotesId = 0;
+    for (notDeletedNote of savedNotes) {
+      notDeletedNote.id = newNotesId.toString();
+      newNotesId++;
     }
+
+    fs.writeFileSync(
+      "./db/db.json",
+      JSON.stringify(savedNotes, null, 2),
+      "utf8",
+      (err, data) => {
+        err ? console.error(err) : console.log(data);
+        if (err) throw err;
+      }
+    );
+
+    res.json(savedNotes);
   });
-}
+});
 
 ```
 
@@ -215,16 +238,14 @@ function writeToFile(employeeData) {
 
 ## Learning-Points
 
-* How to do test-driven development with npm Jest.js
+* How to use npm Express for routing URLs
 
-* How to create command line prompts with npm Inquirer.js
+* How to use regular expressions for routing URLs
 
-* How to create files of dynamically generated HTML content with fs.writeFile() method
+* How to read and sync files with fs.readFile() and fs.writeFileSync() methods
 
-* How to create a new instance of an object using Object Oriented Programming e.g. 
-```
-const John = new Student('John', 'Appleseed', '30');
-```
+* How to use Insomnia's API platform to test API requests
+
 
 <br>
 

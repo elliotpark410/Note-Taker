@@ -120,7 +120,7 @@ app.delete("/api/notes/:id", function (req, res) {
     // create a let newNotesId = 0 which will be incremented and used to keep the same id structure before deletion
     let newNotesId = 0;
 
-    // for of statement loop will loop through all of the noteDeletedNotes in savedNotes array
+    // for of statement loop will loop through all of the notDeletedNotes in savedNotes array
     for (notDeletedNote of savedNotes) {
       // the notDeletedNotes.id will be equal to 0 and converted to a string
       notDeletedNote.id = newNotesId.toString();
