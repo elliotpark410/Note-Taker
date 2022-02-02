@@ -9,9 +9,6 @@ const fs = require("fs");
 const app = express();
 
 
-// import notes data from db.json for req.body.id
-const { notes } = require('./db/db.json');
-
 // Sets up the Express app to handle data parsing for PUTS and POSTS
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -20,12 +17,14 @@ app.use(express.json());
 app.use(express.static('public'));
 
 
-
-
 // process.env.PORT will allow any PORT that a user enters or 3000
 // e.g. if you run node index.js ,Node will use 3000
 // If you run PORT=4444 node index.js, Node will use process.env.PORT which equals to 4444 in this example
 const PORT = process.env.PORT || 3000;
+
+
+
+
 
 
 // GET Route for homepage (index.html)
@@ -43,10 +42,10 @@ app.get('/notes', (req, res) => {
 
 // GET route for notes data stored as stringified array in db.json 
 app.get('/api/notes', (req, res) => {
-  console.log('notes route successful');
+  console.log('notes get route successful');
   fs.readFile('./db/db.json', 'utf8', (err, data) => {
     err ? console.error(err) : console.log(data)
-    if (err) throw err;
+      if (err) throw err;
     // (data) is content stored in db.json
     // Need to JSON.parse(data) because it was stored as a stringified array
     let savedNotes = JSON.parse(data);
@@ -58,15 +57,39 @@ app.get('/api/notes', (req, res) => {
 
 // POST route to store notes data as stringified array in db.json
 app.post('/api/notes', (req, res) => {
-
+  console.log('notes post route successful');
+  fs.readFile('./db/db.json', 'utf8', (err, data) => {
+    err ? console.error(err) : console.log(data)
+      if (err) throw err;
+  
+    let savedNotes = JSON.parse(data);
   // req.body object allows you to access data in a string or JSON object that user entered 
   // e.g. a user does a POST to http://localhost:3000/api/notes in Insomnia or browser and enters data in object format, I will be able to access that data
   let newNote = req.body;
+  let uniqueId = savedNotes.length.toString();
+  console.log(uniqueId);
+  newNote.id = uniqueId;
+  console.log(newNote);
 
+  savedNotes.push(newNote);
+  console.log(savedNotes);
 
-  // CONTINUE HERE!!!!!!!!!!!!!!!!!!!
+    fs.writeFileSync('./db/db.json', JSON.stringify(savedNotes, null, 2), 'utf8', (err, data) => {
+      err ? console.error(err) : console.log(data)
+        if (err) throw err;
+    });
+
+  res.json(savedNotes);
+  });
 
 });
+
+
+
+
+
+
+
 
 
 
