@@ -273,7 +273,7 @@ Big acknowledgements and thank you to Jerome Chenette, Manuel Nunes, Vince Lee, 
 
 
 ## Contact
-If you'd like to learn more about this application, check out my Github profile: [https://github.com/elliotpark410](https://github.com/elliotpark410)
+If you'd like to learn more about my projects, check out my Github profile: [https://github.com/elliotpark410](https://github.com/elliotpark410)
 
 <br>
 
